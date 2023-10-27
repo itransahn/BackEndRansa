@@ -209,5 +209,114 @@ class infor {
             }
         });
     }
+    /* Ver Propietarios */
+    verPropietariosIntegracionMod(parametros) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let conexionSql = new DbHelper_1.default();
+                if (parametros) {
+                    conexionSql.parametros = [];
+                }
+                let respuesta = yield conexionSql.Ejecutar(`sp_cargarClientesintegracion`);
+                if (!respuesta.hasError) {
+                    return {
+                        data: respuesta.data,
+                        errors: respuesta.errors,
+                        hasError: respuesta.hasError
+                    };
+                }
+                else {
+                    return respuesta;
+                }
+            }
+            catch (error) {
+                (0, classes_1.errorMensaje)(error);
+            }
+        });
+    }
+    /* Acciones Propietarios */
+    AccionesPropietarios(parametros) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let conexionSql = new DbHelper_1.default();
+                if (parametros) {
+                    conexionSql.parametros = [
+                        {
+                            parametro: 'tipo',
+                            valor: parametros.tipo
+                        }, {
+                            parametro: 'id',
+                            valor: parametros.id
+                        }, {
+                            parametro: 'propietario',
+                            valor: parametros.propietario
+                        }, {
+                            parametro: 'usuarioAuth0',
+                            valor: parametros.usuarioAuth0
+                        }, {
+                            parametro: 'propietarioQA',
+                            valor: parametros.propietarioQA
+                        },
+                        {
+                            parametro: 'usuarioAuth0QA',
+                            valor: parametros.usuarioAuth0QA
+                        },
+                        {
+                            parametro: 'pwdPRD',
+                            valor: parametros.pwdPRD
+                        },
+                        {
+                            parametro: 'pwdQA',
+                            valor: parametros.pwdQA
+                        }
+                    ];
+                }
+                let respuesta = yield conexionSql.Ejecutar(`Sp_ClienteIntegracion`);
+                if (!respuesta.hasError) {
+                    return {
+                        data: respuesta.data,
+                        errors: respuesta.errors,
+                        hasError: respuesta.hasError
+                    };
+                }
+                else {
+                    return respuesta;
+                }
+            }
+            catch (error) {
+                (0, classes_1.errorMensaje)(error);
+            }
+        });
+    }
+    /* Ver Propietarios */
+    PropietarioEspecifico(parametros) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let conexionSql = new DbHelper_1.default();
+                if (parametros) {
+                    conexionSql.parametros = [
+                        {
+                            parametro: 'propietario',
+                            valor: parametros.propietario
+                        },
+                    ];
+                }
+                let respuesta = yield conexionSql.Ejecutar(`sp_propietarioEspecifico`);
+                if (!respuesta.hasError) {
+                    return {
+                        data: respuesta.data,
+                        errors: respuesta.errors,
+                        hasError: respuesta.hasError
+                    };
+                }
+                else {
+                    return respuesta;
+                }
+            }
+            catch (error) {
+                (0, classes_1.errorMensaje)(error);
+            }
+        });
+    }
 }
 exports.default = infor;

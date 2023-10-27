@@ -190,4 +190,109 @@ export default class infor{
                  errorMensaje(error)
          }
          }
+
+             /* Ver Propietarios */
+async verPropietariosIntegracionMod( parametros ?: any  ) {  
+   try {
+    let conexionSql = new DbHelper();
+    if ( parametros ) {
+            conexionSql.parametros = [ ]
+    }
+
+   let respuesta: any = await conexionSql.Ejecutar(`sp_cargarClientesintegracion`);
+   if (!respuesta.hasError ){
+           return { 
+             data :      respuesta.data,
+             errors :    respuesta.errors,
+             hasError :  respuesta.hasError
+             }
+   }else{
+     return respuesta;
+   }
+} catch ( error ) {
+        errorMensaje(error)
+}
+             }
+
+
+/* Acciones Propietarios */
+async AccionesPropietarios( parametros ?: any  ) {  
+   try {
+    let conexionSql = new DbHelper();
+    if ( parametros ) {
+            conexionSql.parametros = [
+                {
+                        parametro : 'tipo',
+                        valor     : parametros.tipo
+                       },  {
+                        parametro : 'id',
+                        valor     : parametros.id
+                       },  {
+                        parametro : 'propietario',
+                        valor     : parametros.propietario
+                       },  {
+                        parametro : 'usuarioAuth0',
+                        valor     : parametros.usuarioAuth0
+                       },  {
+                        parametro : 'propietarioQA',
+                        valor     : parametros.propietarioQA
+                       },  
+                       {
+                        parametro : 'usuarioAuth0QA',
+                        valor     : parametros.usuarioAuth0QA
+                       },
+                       {
+                        parametro : 'pwdPRD',
+                        valor     : parametros.pwdPRD
+                       },
+                       {
+                        parametro : 'pwdQA',
+                        valor     : parametros.pwdQA
+                       }
+             ]
+    }
+
+   let respuesta: any = await conexionSql.Ejecutar(`Sp_ClienteIntegracion`);
+   if (!respuesta.hasError ){
+           return { 
+             data :      respuesta.data,
+             errors :    respuesta.errors,
+             hasError :  respuesta.hasError
+             }
+   }else{
+     return respuesta;
+   }
+} catch ( error ) {
+        errorMensaje(error)
+}
+             }
+
+
+             /* Ver Propietarios */
+async PropietarioEspecifico( parametros ?: any  ) {  
+        try {
+         let conexionSql = new DbHelper();
+         if ( parametros ) {
+                 conexionSql.parametros = [
+                     {
+                      parametro : 'propietario',
+                      valor     : parametros.propietario
+                     },
+                  ]
+         }
+     
+        let respuesta: any = await conexionSql.Ejecutar(`sp_propietarioEspecifico`);
+        if (!respuesta.hasError ){
+                return { 
+                  data :      respuesta.data,
+                  errors :    respuesta.errors,
+                  hasError :  respuesta.hasError
+                  }
+        }else{
+          return respuesta;
+        }
+     } catch ( error ) {
+             errorMensaje(error)
+     }
+                  }
 }
