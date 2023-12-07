@@ -139,8 +139,8 @@ let base64Encoded = Buffer.from(codificar).toString('base64');
         }
       ).catch( (error : any) =>{
         return res.json({
-               data   : contenedores,
-               errors : contenedores?.errors,
+            data   : error?.response?.data,
+            errors : error?.response?.data?.message,
                hasError :  true
         }
         )
@@ -157,7 +157,7 @@ app.post('/authLoadOrder', (req:Request, res:Response)=>{
     // let url = 'https://api-wms.qas.ransaaplicaciones.com/order';
     let data : string = req.body?.data;
     let token: string = req.body?.token;
-    let url: string = req.body?.url;
+    let url: string   = req.body?.url;
     let response : any;
          let conf = {
            headers: { 
@@ -166,14 +166,14 @@ app.post('/authLoadOrder', (req:Request, res:Response)=>{
          }
          }; 
          let contenedores ; 
-          axios.post(url,JSON.parse(data),conf).then(
+    axios.post(  url,JSON.parse(data),conf).then(
            (data:any)=>{
             contenedores = data?.data
             response = data?.data
             if ( data?.data?.errors[0] ){
-                // console.log(contenedores?.errors)
                 return res.json({
-                    data   : JSON.stringify(data) ,
+                    // data   : JSON.stringify(data) ,
+                    data   : contenedores ,
                     errors : contenedores?.errors,
                     hasError :  true
                 })
@@ -187,14 +187,12 @@ app.post('/authLoadOrder', (req:Request, res:Response)=>{
         }
          ).catch( (error : any) =>{
            return res.json({
-               data   : response,
-               errors : response?.errors,
+               data   : error?.response?.data,
+               errors : error?.response?.data?.message,
                hasError :  true
            }
            )
          }) ;
-         
-    
    })
 
 app.post('/authLoadAsn', (req:Request, res:Response)=>{
