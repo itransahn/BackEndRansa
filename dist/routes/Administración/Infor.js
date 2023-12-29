@@ -137,9 +137,10 @@ app.post('/auth0', (req, res) => {
             });
         }
     }).catch((error) => {
+        var _a, _b, _c;
         return res.json({
-            data: contenedores,
-            errors: contenedores === null || contenedores === void 0 ? void 0 : contenedores.errors,
+            data: (_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data,
+            errors: (_c = (_b = error === null || error === void 0 ? void 0 : error.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message,
             hasError: true
         });
     });
@@ -162,7 +163,6 @@ app.post('/authLoadOrder', (req, res) => {
     let contenedores;
     axios.post(url, JSON.parse(data), conf).then((data) => {
         var _a;
-        console.log('ENTRE');
         contenedores = data === null || data === void 0 ? void 0 : data.data;
         response = data === null || data === void 0 ? void 0 : data.data;
         if ((_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.errors[0]) {
@@ -182,7 +182,6 @@ app.post('/authLoadOrder', (req, res) => {
         }
     }).catch((error) => {
         var _a, _b, _c;
-        console.log(error.response.data);
         return res.json({
             data: (_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data,
             errors: (_c = (_b = error === null || error === void 0 ? void 0 : error.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message,
@@ -259,7 +258,7 @@ app.get('/CpropietariosInt', (req, res) => {
 });
 app.post('/CpropietariosInt', (req, res) => {
     let admin = new InforController_1.default();
-    let params = req.query;
+    let params = req.body;
     admin.AccionesPropietarios(params).then((respuesta) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield respuesta;
         if (!result.hasError) {

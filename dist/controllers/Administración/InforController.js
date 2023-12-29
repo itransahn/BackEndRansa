@@ -268,10 +268,15 @@ class infor {
                         {
                             parametro: 'pwdQA',
                             valor: parametros.pwdQA
+                        },
+                        {
+                            parametro: 'sede',
+                            valor: parametros.sede
                         }
                     ];
                 }
                 let respuesta = yield conexionSql.Ejecutar(`Sp_ClienteIntegracion`);
+                //    console.log(respuesta)
                 if (!respuesta.hasError) {
                     return {
                         data: respuesta.data,

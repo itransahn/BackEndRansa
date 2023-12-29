@@ -248,11 +248,16 @@ async AccionesPropietarios( parametros ?: any  ) {
                        {
                         parametro : 'pwdQA',
                         valor     : parametros.pwdQA
+                       },
+                       {
+                        parametro : 'sede',
+                        valor     : parametros.sede
                        }
              ]
     }
 
    let respuesta: any = await conexionSql.Ejecutar(`Sp_ClienteIntegracion`);
+//    console.log(respuesta)
    if (!respuesta.hasError ){
            return { 
              data :      respuesta.data,

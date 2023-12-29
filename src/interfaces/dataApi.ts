@@ -3,7 +3,6 @@
     data: any[] | any,
     errors: any[],
     hasError: boolean
-    
 }
 
 

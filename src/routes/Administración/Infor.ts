@@ -269,7 +269,7 @@ app.get('/CpropietariosInt', (req:Request, res:Response)=>{
 
 app.post('/CpropietariosInt', (req:Request, res:Response)=>{
     let admin = new infor();
-    let params = req.query;
+    let params = req.body;
     admin.AccionesPropietarios( params ).then(async ( respuesta: any )=>{
         const result : dataApi = await respuesta;
         if(!result.hasError ){

@@ -21,7 +21,6 @@ let llanta = new Llantas();
         });
         })
     
-    
         //Tipos de Maquina
     app.get('/tiposdeMaquina' ,  (req: Request, res:Response)=>{
         let params = req.body;
